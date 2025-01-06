@@ -15,8 +15,8 @@ More secure than user\password authentication
 
 <h2>Basic assumptions</h2>
 <ul>
-<li>client : linux client or WSL if you use windows 10</li>
-<li>server : linux</li>
+<li>client machine os : is linux or WSL if you use windows 10</li>
+<li>server os : linux</li>
 <li>you : have basic knowledge in linux</li>
 </ul>
 
@@ -43,26 +43,61 @@ systemctl restart sshd
 ssh-keygen
 ```
 
-This will create two files on  ~/.ssh
+This will create two files under your client machine  ~/.ssh 
+<ul>
+<li>public key file - id_rsa</li>
+<li>private key file - id_rsa.pub</li>
+</ul>
 
 <h3>Step 3 : Copy the public key to the server using ssh-copy-id</h3>
 
+```bash
+ssh-copy-id username@hostname
+```
+
+The public key is copied to the server  /home/username/.ssh/authorized_keys
+
 <h3>Step 4 : Login to the server using the command ssh</h3>
+
+```bash
+ssh username@hostname
+```
+
 
 <h3>Step 5 : Optionally add more security via /etc/ssh/sshd_config</h3>
 
+```bash
+nano /etc/ssh/sshd_config
+PasswordAuthentication no 
+PermitRootLogin prohibit-password
+```
+
+after you save the file 
+
+```bash
+systemctl restart sshd
+```
+
+
 <h2>Demo</h2>
-This demo was created using digital ocean droplet and ubuntu 
+This demo was created using digital ocean droplet and ubuntu. digitial ocean droplet is a VPS
 
 <h3>Default public \ private keys</h3>
 
 <h3>Non Default public \ private keys</h3>
+This use case is relevant if you want to authenticate with more than one server
 
 
 <h2>Points of Interest</h2>
 <ul>
     <li>windows 10 WSL client</li>
+    I found WSL to be very convenient as using linux on windows so i am using it.
     <li>temporary use 'PasswordAuthentication yes' before ssh-copy-id </li>
+    If you want to allow a user to authenticate using public key after  'PasswordAuthentication no' and 'PubkeyAuthentication yes' you will be faced with catch 21. Only public key authentication is allowed but the new user does not have public key on the server. you have two options
+    <ul>
+    <li>add the public key file to the server using other user that all ready has public \ private keys</li>
+    <li>temporary set 'PasswordAuthentication yes' and after ssh-copy-id is finish , revert back</li>
+    </ul>
 </ul>
 
 <h2>References</h2>
