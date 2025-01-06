@@ -1,65 +1,72 @@
+<h1>Project name</h1>
+SSH public key authentication
 
+<h2>Project Description</h2>
+This repository explains how to authenticate to a VPS using public \ private keys via SSH
 
-<h2>Table of Contents</h2>
+<h2>Motivations</h2>
+You have a server and you want to work on it secuerly
+
+<h3>why SSH</h3>
+SSH allow the info between client and server to be encrypted (reference [1])
+
+<h3>why private \ public key authetication</h3>
+More secure than user\password authentication
+
+<h2>Basic assumptions</h2>
 <ul>
-    <li><a href="#project-description">Project Description</a></li>
-    <li><a href="#motivation">Motivation</a></li>
-    <li><a href="#installation">Installation</a></li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#design">Design</a></li>
-    <li><a href="#technologies-used">Technologies Used</a></li>
-    <li><a href="#code-structure">Code Structure</a></li>
-    <li><a href="#demo">Demo</a></li>
-    <li><a href="#points-of-interest">Points of Interest</a></li>
-    <li><a href="#references">References</a></li>
+<li>client : linux client or WSL if you use windows 10</li>
+<li>server : linux</li>
+<li>you : have basic knowledge in linux</li>
 </ul>
 
-<h2 id="project-description">Project Description</h2>
-<p>A concise and informative summary of the project's purpose, key features, and target audience.</p>
+<h2>How to authenticate a VPS user using SSH and public \ private keys</h2>
 
-<h2 id="motivation">Motivation</h2>
-<p>A clear explanation of the reasons behind the project's creation, including the problem it addresses and the benefits it offers.</p>
+<h3>Step 1 : Allow public key autentication via /etc/ssh/sshd_config</h3>
 
-<h2 id="installation">Installation</h2>
-<p>Step-by-step instructions on how to set up the development environment and install necessary dependencies. </p>
+```bash
+nano /etc/ssh/sshd_config
+PubkeyAuthentication yes 
+```
+
+after you save the file 
+
+```bash
+systemctl restart sshd
+```
 
 
-<h2 id="usage">Usage</h2>
-<p>Instructions on how to use the project, including examples, screenshots, or code snippets</p>
+
+<h3>Step 2 : Create locally public \ client key files using ssh-keygen</h3>
+
+```bash
+ssh-keygen
+```
+
+This will create two files on  ~/.ssh
+
+<h3>Step 3 : Copy the public key to the server using ssh-copy-id</h3>
+
+<h3>Step 4 : Login to the server using the command ssh</h3>
+
+<h3>Step 5 : Optionally add more security via /etc/ssh/sshd_config</h3>
+
+<h2>Demo</h2>
+This demo was created using digital ocean droplet and ubuntu 
+
+<h3>Default public \ private keys</h3>
+
+<h3>Non Default public \ private keys</h3>
 
 
-<h2 id="design">Design</h2>
-<p>A high-level overview of the project's architecture, design patterns, and key components.</p>
-
-<h2 id="technologies-used">Technologies Used</h2>
+<h2>Points of Interest</h2>
 <ul>
-    <li>Frontend technologies (e.g., React, Vue, Angular)</li>
-    <li>Backend technologies (e.g., Node.js, Python, Ruby)</li>
-    <li>Databases (e.g., MySQL, PostgreSQL, MongoDB)</li>
-    <li>Cloud platforms (if applicable)</li>
+    <li>windows 10 WSL client</li>
+    <li>temporary use 'PasswordAuthentication yes' before ssh-copy-id </li>
 </ul>
 
-<h2 id="code-structure">Code Structure</h2>
-<p>An explanation of the project's code structure, including important files and directories.</p>
-
-<h2 id="demo">Demo</h2>
-<p>A link to a live demo or a GIF/video showcasing the project's functionality.</p>
+<h2>References</h2>
 <ul>
-    <li>Live demo link</li>
-    <li>GIF or video demonstration</li>
-</ul>
-
-<h2 id="points-of-interest">Points of Interest</h2>
-<ul>
-    <li>Innovative features</li>
-    <li>Technical challenges and solutions</li>
-    <li>Lessons learned</li>
-</ul>
-
-<h2 id="references">References</h2>
-<ul>
-    <li>External libraries or frameworks</li>
-    <li>Articles or tutorials</li>
-    <li>Other relevant resources</li>
+    <li><a href='https://www.youtube.com/watch?v=R48-UaZ4q1k'> SSH Essentials in 7.5 minutes </a></li>
 </ul>
 
