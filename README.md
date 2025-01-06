@@ -90,9 +90,9 @@ This use case is relevant if you want to authenticate with more than one server
 
 <h2>Points of Interest</h2>
 <ul>
-    <li>windows 10 WSL client</li>
+    <li><h3>windows 10 WSL client</h3></li>
     I found WSL to be very convenient as using linux on windows so i am using it.
-    <li>temporary use 'PasswordAuthentication yes' before ssh-copy-id </li>
+    <li><h3>temporary use 'PasswordAuthentication yes' before ssh-copy-id</h3></li>
     If you want to allow a user to authenticate using public key after  'PasswordAuthentication no' and 'PubkeyAuthentication yes' you will be faced with catch 21. Only public key authentication is allowed but the new user does not have public key on the server. you have two options
     <ul>
     <li>add the public key file to the server using other user that all ready has public \ private keys</li>
