@@ -119,9 +119,12 @@ as shown in the the following image
 <img src='./figs/login-root.png'/>
 
 
-<h3>Non-Default Public/Private Keys</h3> <p>This use case is relevant if you want to authenticate with more than one server or user.</p>
+<h3>Non-Default Public/Private Keys</h3> 
+<p>This use case is relevant if you want to authenticate with more than one
+ server or user</p>
 
-Create keys as shown in the following image. Notice that specific private key file is used 
+<p>Create keys as shown in the following image. 
+Notice that specific private key file is used</p> 
 
 <img src='./figs/ssh-keygen-non-default.png'/>
 
@@ -131,23 +134,7 @@ The resulting key pair appears in the following image:
 
 <p>Now you need to copy the public key to the server</p> 
 
-you want to use <code>ssh-copy-id</code> and have:
-
-```bash
-PasswordAuthentication no
-```
-
-as shown in the following image
-
-<img src='./figs/password-no.png'>
-
-Then you need to temporarily change it in <code>/etc/ssh/sshd_config</code> to yes, and after saving, invoke the following command:
-
-```bash
-systemctl restart sshd
-```
-
-Now you can use <code>ssh-copy-id</code>:
+You can use <code>ssh-copy-id</code>:
 
 
 ```bash
@@ -158,17 +145,6 @@ as shown in the following image:
 
 <img src='./figs/copy-non-default.png'/>
 
-Now change back to no:
-
-```bash
-PasswordAuthentication no
-```
-
-and don't forget to invoke the following command after saving:
-
-```bash
-systemctl restart sshd
-```
 
 Now login using the specific private key:
 
@@ -188,9 +164,9 @@ as shown in the following image:
     </li> 
     <p>I found WSL to be very convenient for using Linux on Windows, so I am using it.</p> 
 <li>
-<h3>Caveats with 'PasswordAuthentication yes'</h3>
+<h3>Caveats with 'PasswordAuthentication no'</h3>
 </li> 
-<p>If you want to allow a user to authenticate using public key with <code>PasswordAuthentication no</code> and <code>PubkeyAuthentication yes</code>, you will face a catch-22. Only public key authentication is allowed, but the new user does not have a public key on the server. You have two options:</p> 
+<p>If you want to allow a user to authenticate using public key with <code>PasswordAuthentication no</code> and <code>PubkeyAuthentication yes</code>, you will face a catch-21. Only public key authentication is allowed, but the new user does not have a public key on the server. You have two options:</p> 
 <ul> 
 <li>Add the public key file to the server using another user that already has public/private keys.</li> 
 <li>Temporarily set <code>PasswordAuthentication yes</code>, and after <code>ssh-copy-id</code> is finished, revert it back.</li> 
