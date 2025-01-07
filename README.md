@@ -84,8 +84,92 @@ This demo was created using digital ocean droplet and ubuntu. digitial ocean dro
 
 <h3>Default public \ private keys</h3>
 
+Create keys with 
+
+```bash
+ssh-keygen 
+```
+
+and get the files id_rsa and id_rsa.pub
+
+<img src='./figs/default_keys.png'/>
+
+Copy the public key to the server using
+
+```bash
+ssh-copy-id 
+```
+
+Login with 
+
+```bash
+ssh username@hostname
+```
+
+as follows
+
+<img src='./figs/login-root.png'/>
+
 <h3>Non Default public \ private keys</h3>
-This use case is relevant if you want to authenticate with more than one server
+<p>This use case is relevant if you want to authenticate with more than one server or users</p>
+
+Create keys as follows
+
+<img src='./figs/ssh-keygen-non-default.png'/>
+
+The resulted key pairs
+
+<img src='./figs/create-non-default-keys.png'/>
+
+Now you need to copy the public key to the server. If you want to use ssh-copy-id and have 
+
+```bash
+PasswordAuthentication no
+```
+
+as shown here
+
+<img src='./figs/password-no.png'>
+
+Than you need temporary change it in /etc/ssh/sshd_config to no and dont forget
+
+```bash
+systemctl restart sshd
+```
+
+Now you can use ssh-copy-id
+
+```bash
+ssh-copy-id -i ~/.ssh/custom_key_name.pub username@your_server_ip
+```
+
+as shown
+
+<img src='./figs/copy-non-default.png'/>
+
+Now change back to no
+
+```bash
+PasswordAuthentication no
+```
+
+and dont forget
+
+```bash
+systemctl restart sshd
+```
+
+and login using the specific private key
+
+```bash
+ssh -i path_to_private_key username@your_server_ip
+```
+
+as follows
+
+<img src='./figs/cicd-login.png'/>
+
+
 
 
 <h2>Points of Interest</h2>
