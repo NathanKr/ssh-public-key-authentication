@@ -6,7 +6,7 @@ This repository explains how to authenticate to a VPS using public/private keys 
 
 
 <h2>Motivations</h2>
-You have a server and you want to work on it secuerly
+You have a server and you want to work on it securely
 
 <h3>Why SSH</h3>
 SSH allows the information between the client and server to be encrypted (reference [1]).
